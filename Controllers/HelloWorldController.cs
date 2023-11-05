@@ -7,6 +7,7 @@ namespace learningReactWithAspDotNet.Controllers
     public class HelloWorldController : ControllerBase
     {
         private readonly ILogger<HelloWorldController> _logger;
+        private readonly IEnumerable<String> list = new List<string> { "John", "Says", "Hi" };
 
         public HelloWorldController(ILogger<HelloWorldController> logger)
         {
@@ -14,6 +15,6 @@ namespace learningReactWithAspDotNet.Controllers
         }
         /* https://learn.microsoft.com/en-us/aspnet/core/web-api/action-return-types?view=aspnetcore-7.0 */
         [HttpGet]
-        public IEnumerable<String> Get() => new List<String> { "John", "Says", "Hi"};
+        public IEnumerable<String> Get() => list;
     }
 }

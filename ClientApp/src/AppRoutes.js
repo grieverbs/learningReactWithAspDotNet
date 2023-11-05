@@ -1,7 +1,8 @@
+import { Home } from "./components/Home";
 import { Counter } from "./components/Counter";
 import { FetchData } from "./components/FetchData";
 import { HelloWorld } from "./components/HelloWorld";
-import { Home } from "./components/Home";
+import { Emoji } from "./components/Emoji";
 
 const AppRoutes = [
     {
@@ -19,6 +20,10 @@ const AppRoutes = [
     {
         path: '/hello-world',
         element: <HelloWorld />
+    },
+    {
+        path: '/emoji',
+        element: <Emoji />
     }
 ];
 

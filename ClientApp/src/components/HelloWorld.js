@@ -40,7 +40,7 @@ export class HelloWorld extends Component {
             <div>
                 <div>The following message is coming from api/HelloWorld</div>
                 {messages.map(message => 
-                    <div>
+                    <div key={ message }>
                         <span>{message}</span>
                         <span>, </span>
                     </div>
