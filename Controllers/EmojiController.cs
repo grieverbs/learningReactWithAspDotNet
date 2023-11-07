@@ -6,23 +6,24 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace learningReactWithAspDotNet.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class EmojiController : ControllerBase
     {
         private readonly ILogger<EmojiController> _logger;
-        private IEnumerable<Emoji> emojis = Enumerable.Empty<Emoji>();
+        private IEnumerable<Emoji>? emojis = null;
 
         public EmojiController(ILogger<EmojiController> logger)
         {
             this._logger = logger;
-            EmojiJsonReader.LoadJson(emojis);
+            /* https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/null-coalescing-operator */
+            emojis ??= EmojiJsonReader.LoadJson();            
         }
 
         // GET: api/<EmojiController>
         [HttpGet]
-        public IEnumerable<Emoji> GetEmojis() {
-            return emojis;
+        public IEnumerable<Emoji> Get() {
+            return emojis ?? Enumerable.Empty<Emoji>();
         }
 
         // GET api/<EmojiController>/abc
@@ -30,7 +31,7 @@ namespace learningReactWithAspDotNet.Controllers
         public Task<ActionResult<Emoji>> GetEmoji(String name)
         {
             _logger.Log(LogLevel.Information, "I'm a logger!!!");
-            return Task.FromResult<ActionResult<Emoji>>(emojis.FirstOrDefault(x => x.name.ToLower().Equals(name.ToLower())));
+            return Task.FromResult<ActionResult<Emoji>>(emojis.FirstOrDefault(x => x.Name.ToLower().Equals(name.ToLower())));
         }
 
         //// POST api/<EmojiController1>

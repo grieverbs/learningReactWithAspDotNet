@@ -9,7 +9,6 @@ export class HelloWorld extends Component {
             messages: null,
             loading: true
         }
-            ;
     }
 
     componentDidMount() {
@@ -30,7 +29,7 @@ export class HelloWorld extends Component {
     }
 
     async populateData() {
-        const response = await fetch('helloworld');
+        const response = await fetch('api/helloworld');
         const data = await response.json();
         this.setState({ messages: data, loading: false });
     }
@@ -39,8 +38,8 @@ export class HelloWorld extends Component {
         return (
             <div>
                 <div>The following message is coming from api/HelloWorld</div>
-                {messages.map(message => 
-                    <div key={ message }>
+                {messages.map(message =>
+                    <div key={message}>
                         <span>{message}</span>
                         <span>, </span>
                     </div>

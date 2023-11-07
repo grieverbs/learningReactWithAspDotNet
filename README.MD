@@ -19,3 +19,6 @@ npm start (more info in ClientApp/README.md)
 ## Running the webservice F5
 
 You might see an error with missing CMD npm. Probably because NODE was installed after Visual Studio is opened and the environment hasn't been reloaded for the app. Just restart it.
+
+## C# resources
+https://learn.microsoft.com/en-us/dotnet/csharp/

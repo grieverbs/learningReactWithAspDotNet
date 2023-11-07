@@ -7,38 +7,52 @@ export class Emoji extends Component {
         super(props);
         this.state = {
             emojis: [],
-            loading: true
+            loading: true,
+            text: "test"
         }
     }
 
-    componentMount() {
-        console.log("componentMount");
+    componentDidMount() {
         this.getData();
     }
 
     render() {
-        let content = !this.state.loading ? <div>I'm loading data!</div> : Emoji.renderData(this.state.emojis);
+        let content = this.state.loading ? <div>I'm loading data!</div> : Emoji.renderData(this.state.emojis);
         return (
             <div>{content}</div>
         )
     }
 
     async getData() {
-        console.log("getData");
-        const response = await fetch('emoji');
-        console.log(response)
-        //const data = await response.json();
-        //console.log(data);
-        this.setState({ emojis: [], loading: false });
+        const response = await fetch('api/emoji');
+        const data = await response.json();
+        this.setState({ emojis: data, loading: false });
     }
 
     static renderData(emojis) {
-        return <div>bad</div>
+        return (
+            <table className="table table-striped" aria-labelledby="tableLabel">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Image URL</th>                        
+                    </tr>
+                </thead>
+                <tbody>
+                    {emojis.map(emoji =>
+                        <tr key={emoji.name}>
+                            <td>{emoji.name}</td>
+                            <td>{emoji.imageUrl}</td>
+                        </tr>
+                    )}
+                </tbody>
+            </table>
+        )
         /*
          * Can't do this
          * return { emojis }
          * Objects are not valid as a React child (found: object with keys {emojis}). If you meant to render a collection of children, use an array instead.
          */
-        
+
     }
 };
