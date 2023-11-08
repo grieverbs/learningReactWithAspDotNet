@@ -1,4 +1,5 @@
 ﻿using learningReactWithAspDotNet.Models;
+using learningReactWithAspDotNet.Services;
 using learningReactWithAspDotNet.Utilities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,17 +13,22 @@ namespace learningReactWithAspDotNet.Controllers
     {
         private readonly ILogger<EmojiController> _logger;
         private IEnumerable<Emoji>? emojis = null;
+        private IEmojiService? _emojiService;
 
-        public EmojiController(ILogger<EmojiController> logger)
+        public EmojiController(ILogger<EmojiController> logger, IEmojiService emojiService)
         {
             this._logger = logger;
+            this._emojiService = emojiService;
             /* https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/null-coalescing-operator */
-            emojis ??= EmojiJsonReader.LoadJson();            
+
         }
 
         // GET: api/<EmojiController>
         [HttpGet]
         public IEnumerable<Emoji> Get() {
+            emojis ??= EmojiJsonReader.LoadJson();
+            var test = _emojiService.GetEmojiAsync();
+            _logger.LogInformation("Test");
             return emojis ?? Enumerable.Empty<Emoji>();
         }
 

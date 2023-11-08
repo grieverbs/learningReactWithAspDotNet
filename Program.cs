@@ -1,9 +1,13 @@
+using learningReactWithAspDotNet.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddSwaggerGen();
+/* Add to the scope for dependency injection*/
+builder.Services.AddScoped<IEmojiService, EmojiService>();
 
 var app = builder.Build();
 

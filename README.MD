@@ -22,3 +22,6 @@ You might see an error with missing CMD npm. Probably because NODE was installed
 
 ## C# resources
 https://learn.microsoft.com/en-us/dotnet/csharp/
+
+## Playing with Github's emojis
+https://api.github.com/emojis
